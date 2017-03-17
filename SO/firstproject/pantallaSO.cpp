@@ -1,5 +1,8 @@
 #include <string>
 #include <iostream>
+#include <stdio.h>
+#include <conio.h>
+#include <dos.h>
 using namespace std;
 
 void  pantalla_inicial()
@@ -30,14 +33,18 @@ void  pantalla_inicial()
 
 
 
-string squares[6][9];	
+char squares[6][9][15];	
 void llenar_matriz()
 {
 	for(int i=0;i<6;i=i+1)
 	{
 	  for(int j=0;j<9;j=j+1)
 		{
-		  squares[i][j]=string(15,' ');	
+			for(int k=0;k<15;k=k+1)
+			{
+				
+			  squares[i][j][k]='=';	
+			}	
 		} 	
 	}
 }
@@ -55,11 +62,17 @@ int main()
 	squares[1][3][4]='?';
 	squares[1][2][5]='0';
 	squares[2][2][4]='*';
+	//gotoxy(4,5);
 	for(int i=0;i<6;i=i+1)
 	{
 	  for(int j=0;j<9;j=j+1)
 		{
-		  	cout <<squares[i][j]<<endl;
+				for(int k=0;k<15;k=k+1)
+			{
+				
+			  cout<<squares[i][j][k];	
+			}	
+		  	cout <<endl;
 		} 	
 		cout <<endl;
 		cout <<endl;
