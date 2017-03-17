@@ -1,13 +1,10 @@
-#include <string>
-#include <iostream>
 #include <stdio.h>
 #include <conio.h>
 #include <dos.h>
 using namespace std;
-
 void  pantalla_inicial()
 {
-	string line1(17,'*'),	line2(17,' ');
+	/*string line1(17,'*'),	line2(17,' ');
 	string line3(17*3,' ');
 	line3[0]='*';
 	line3[(17*3)-1]='*';
@@ -28,7 +25,7 @@ void  pantalla_inicial()
 	
 	cout <<line3<<endl;
 	cout <<line1<<line1<<line1<<endl;
-
+	*/
 }
 
 
@@ -70,16 +67,15 @@ int main()
 				for(int k=0;k<15;k=k+1)
 			{
 				
-			  cout<<squares[i][j][k];	
+			  printf(""+squares[i][j][k]);	
 			}	
-		  	cout <<endl;
+		  	printf("\n");
 		} 	
-		cout <<endl;
-		cout <<endl;
+		printf("\n");
+		printf("\n");
 	}
 
 	getchar();
-	system("cls");
   	return 0;
 	
 }
