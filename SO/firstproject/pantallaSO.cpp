@@ -1,41 +1,41 @@
 #include <stdio.h>
 #include <conio.h>
 #include <dos.h>
-using namespace std;
+
 void  pantalla_inicial()
-{    
+{
 for (int j =0;j<2;j=j+1)
 {
 
-	for(int i=0;i<17*3;i=i+1)
+	for(int k=0;k<17*3;k=k+1)
 	{
 		 printf("*");
 	}
 	printf("\n");
-	for(int i=0;i<9;i=i+1)
+	for(int l=0;l<9;l=l+1)
 	{
-		
+
 		printf("*");
-		for(int i=0;i<(17)-2;i=i+1)
+		for(int n=0;n<(17)-2;n=n+1)
 		{
 			 printf(" ");
 		}
 		printf("*");
 		printf("*");
-		for(int i=0;i<(17)-2;i=i+1)
+		for(int o=0;o<(17)-2;o=o+1)
 		{
 			 printf(" ");
 		}
 		printf("*");
 		printf("*");
-		for(int i=0;i<(17)-2;i=i+1)
+		for(int p=0;p<(17)-2;p=p+1)
 		{
 			 printf(" ");
 		}
 		printf("*");
 		printf("\n");
     }
-    for(int i=0;i<17*3;i=i+1)
+    for(int m=0;m<17*3;m=m+1)
 	{
 		 printf("*");
 	}
