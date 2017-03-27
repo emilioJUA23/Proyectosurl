@@ -23,7 +23,7 @@ int contexto = 0;
 int pt_cadena = 0; //Size de cadena
 char cadena[80]; //Comandos
 int salir = 0;
-char squares[6][9][15];
+char squares[6][9][15];//squares[pantalla][posicion y][posicion x]
 char far *video_mem = (char far*) 0xBB8000000L;
 
 void  pantalla_inicial()
@@ -80,6 +80,33 @@ void  pantalla_inicial()
 	printf("\n");
 
 
+
+}
+int posx(int pantallax)
+{	//metooo que devuelve posicion x inicial de la pantalla
+	if (pantallax==1||pantallax==4)	{return 2;}
+	else if (pantallax==2||pantallax==5){return 2+17;}
+	else if (pantallax==3||pantallax==6){return 2+(17*2);}
+	else{return 0;}
+}
+
+int posy(int pantallay)
+{	//metodo que devuelve la posicion y inicial de la pantalla
+    if (pantallay==1||pantallay==2||pantallay==3)	{return 2;}
+	else if (pantallay==4||pantallay==5||pantallay==6){return 2+11;}
+	else{return 0;}
+}
+
+void imprimir_pantalla(int pa)
+{
+   for (int i = 0; i < 9; ++i)
+   {
+   		for (int j = 0; j < 15; ++j)
+   		{
+   			gotoxy(posx(pa)+j,posy(pa)+i);
+   			printf("%c", squares[pa-1][i][j]);
+   		}
+   }
 
 }
 
@@ -195,6 +222,9 @@ int main(void)
 {	clrscr();
 	//llamamos a la pintada inicial
 	pantalla_inicial();
+	squares[3][0][0]='c';
+	squares[3][4][2]='r';
+	imprimir_pantalla(4);
 	ResetRaton();
 	oldhandler = getvect(INTR);
 	setvect(INTR, temporizador);
