@@ -122,35 +122,17 @@ void imprimir_pantalla(int pa)
 int tell_me_a_screen(int x,int y)
 {
 	//pantalla 1
-	if (x>1&&x<17&&y>1&&y<11)
-	{
-		return 1;
-	}
+	if (x>1&&x<17&&y>1&&y<11){return 1;}
 	//pantalla 2 
-	else if (x>18&&x<34&&y>1&&y<11)
-	{
-		return 2;
-	}
+	else if (x>18&&x<34&&y>1&&y<11){return 2;}
 	//pantalla 3 
-	else if (x>35&&x<51&&y>1&&y<11)
-	{
-		return 3;
-	}
+	else if (x>35&&x<51&&y>1&&y<11){return 3;}
 	//pantalla 4 
-	else if (x>1&&x<17&&y>12&&y<22)
-	{
-		return 4;
-	}
+	else if (x>1&&x<17&&y>12&&y<22){return 4;}
 	//pantalla 5
-	else if (x>18&&x<34&&y>12&&y<22)
-	{
-		return 5;
-	}
+	else if (x>18&&x<34&&y>12&&y<22){return 5;}
 	//pantalla 6
-	else if (x>35&&x<51&&y>12&&y<22)
-	{
-		return 6;
-	}
+	else if (x>35&&x<51&&y>12&&y<22){return 6;}
   	else {return 0;}
 
 }
@@ -199,15 +181,15 @@ int ClicRaton()
 		//Mandar las coordenadas a un metodos que decida a que pantalla corresponde
 		int x = ((int)regout.x.cx/8)+1;
 		int y = ((int)regout.x.dx/8)+1;
-		gotoxy(x,y);
-		printf("#");
 		int pantalla = tell_me_a_screen(x,y);
 		if (pantalla==0)
 		{
-			
+			count--;
 		}
 		else
 		{
+			gotoxy(x,y);
+			printf("#");
 			squares[pantalla-1][y-posy(pantalla)][x-posx(pantalla)]='%';
 		}
 		m_presionado = 1;
