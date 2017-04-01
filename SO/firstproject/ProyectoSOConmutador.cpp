@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <dos.h>
 #include <conio.h>
+#include <string.h>
 
 #define INTR 0X1C //Direccion de interrupcion de temporizador
 
@@ -16,9 +17,7 @@ void interrupt (*oldhandler)(__CPPARGS);
 int count = 0;
 int quantum = 0;
 int tempo = 0;
-int j = 2; //Colores
 int m_presionado = 0;
-int t_presionado = 0;
 int contexto = 0;
 int pt_cadena = 0; //Size de cadena
 char cadena[80]; //Comandos
@@ -138,20 +137,6 @@ int tell_me_a_screen(int x,int y)
 
 }
 
-void color_text()
-{
-	int i;
-	for (i=1; i<=3999; i=i+2)
-	{
-		*(video_mem + i) = j;
-		if(j == 8)
-		{
-			j = 2;
-		}
-	}
-	j++;
-}
-
 //----------------PROCESO DEL MOUSE--------------------------
 int ResetRaton()
 {
@@ -213,28 +198,121 @@ int ClicRaton()
 
 
 //---------------------PROCESO DE TECLADO---------------------------
+void comando()
+{
+	char *add = "add", *pause = "pause", *play = "play", *clear ="clear", *quantum = "quantum", *stats = "stats", *erase = "erase";
+	int cmp;
+	char *ptr, *tmp;
+	char space = ' ';
+
+	ptr = strchr(cadena,space);
+	ptr++;
+
+	gotoxy(2,25);
+	cmp = strncmp(cadena,add,3);
+	if (cmp == 0)
+	{
+		/* codigo add */
+	}
+	else
+	{
+	    cmp = strncmp(cadena,pause,5);
+	    if (cmp == 0)
+	    {
+		/* codigo pause */
+	    }
+	    else
+	    {
+		cmp = strncmp(cadena,play,4);
+		if (cmp == 0)
+		{
+		     /* codigo play */
+		}
+		else
+		{
+		    cmp = strncmp(cadena,clear,5);
+		    if (cmp == 0)
+		    {
+			/* codigo clear */
+		    }
+		    else
+		    {
+			cmp = strncmp(cadena,quantum,7);
+			if (cmp == 0)
+			{
+			    tmp=strrchr(cadena,space);
+			    tmp++;
+			    /* codigo quantum */
+			}
+			else
+			{
+			    cmp = strncmp(cadena,stats,5);
+			    if (cmp == 0)
+			    {
+				/* codigo stats */
+			    }
+			    else
+			    {
+				cmp = strncmp(cadena,erase,5);
+				if (cmp == 0)
+				{
+				    /* codigo erase */
+				}
+				else
+				{
+				    printf("Comando invalido\n");
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	}
+}
 int Teclado(void)
 {
 	if(kbhit())
 	{
-		//Verificar si es backspace
 		pt_cadena++;
 		gotoxy(pt_cadena+1,23);
 		char ch = getch();
-		
-		if (ch==13)
+		if(ch == 8) //Backspace
 		{
-			limpiar_texto();
-			pt_cadena=0;
-			//metodo de Leslie
+		   if(pt_cadena > 1)
+		   {
+			pt_cadena--;
+			gotoxy(pt_cadena+1,23);
+			printf(" ");
+			pt_cadena--;
+			cadena[pt_cadena] = ch;
+			gotoxy(pt_cadena+1,23);
+		   }
+		   else if (pt_cadena == 1)
+		   {
+			pt_cadena--;
+			gotoxy(2,23);
+			printf(" ");
+			gotoxy(2,23);
+			pt_cadena = 0;
+		   }
+		}
+		else if (ch == 13)
+		{
+		   limpiar_texto();
+		   pt_cadena = 0;
+		   //Metodo de Leslie
+		   comando();
+		}
+		else if (pt_cadena >= 79)
+		{
+		   pt_cadena--;
 		}
 		else
 		{
-			printf("%c", ch);
-			cadena[pt_cadena] = ch;
+		   printf("%c", ch);
+		   cadena[pt_cadena - 1] = ch;
 		}
-		
-		
+
 	}
 	return 1;
 }
@@ -310,7 +388,7 @@ int main(void)
 	setvect(INTR, oldhandler);
 	limpiar_texto();
 	gotoxy(2,23);
-	printf("Presiona enter para salir\n");
+	printf("Presiona enter para salir");
 	gets(cadena);
 	return 0;
 }
