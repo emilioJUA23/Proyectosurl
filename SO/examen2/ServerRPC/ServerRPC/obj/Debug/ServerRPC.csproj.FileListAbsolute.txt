@@ -1,0 +1,8 @@
+c:\users\luisemilio\documents\visual studio 2017\Projects\ServerRPC\ServerRPC\bin\Debug\ServerRPC.exe.config
+c:\users\luisemilio\documents\visual studio 2017\Projects\ServerRPC\ServerRPC\bin\Debug\ServerRPC.exe
+c:\users\luisemilio\documents\visual studio 2017\Projects\ServerRPC\ServerRPC\bin\Debug\ServerRPC.pdb
+c:\users\luisemilio\documents\visual studio 2017\Projects\ServerRPC\ServerRPC\obj\Debug\ServerRPC.csprojResolveAssemblyReference.cache
+c:\users\luisemilio\documents\visual studio 2017\Projects\ServerRPC\ServerRPC\obj\Debug\ServerRPC.exe
+c:\users\luisemilio\documents\visual studio 2017\Projects\ServerRPC\ServerRPC\obj\Debug\ServerRPC.pdb
+C:\Users\LuisEmilio\documents\visual studio 2017\Projects\ServerRPC\ServerRPC\bin\Debug\Libreria.dll
+C:\Users\LuisEmilio\documents\visual studio 2017\Projects\ServerRPC\ServerRPC\bin\Debug\Libreria.pdb

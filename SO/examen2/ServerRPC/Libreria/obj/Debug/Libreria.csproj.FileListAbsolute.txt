@@ -1,0 +1,5 @@
+C:\Users\LuisEmilio\documents\visual studio 2017\Projects\ServerRPC\Libreria\bin\Debug\Libreria.dll
+C:\Users\LuisEmilio\documents\visual studio 2017\Projects\ServerRPC\Libreria\bin\Debug\Libreria.pdb
+C:\Users\LuisEmilio\documents\visual studio 2017\Projects\ServerRPC\Libreria\obj\Debug\Libreria.csprojResolveAssemblyReference.cache
+C:\Users\LuisEmilio\documents\visual studio 2017\Projects\ServerRPC\Libreria\obj\Debug\Libreria.dll
+C:\Users\LuisEmilio\documents\visual studio 2017\Projects\ServerRPC\Libreria\obj\Debug\Libreria.pdb
