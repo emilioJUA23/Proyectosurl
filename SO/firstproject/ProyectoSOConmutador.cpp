@@ -54,49 +54,49 @@ void  pantalla_inicial()
 
 		for(int k=0;k<17*3;k=k+1)
 		{
-			 printf("*");
+			 printf("%c",219);
 		}
 		printf("\n");
 		for(int l=0;l<9;l=l+1)
 		{
 
-			printf("*");
+			printf("%c",219);
 			for(int n=0;n<(17)-2;n=n+1)
 			{
 				 printf(" ");
 			}
-			printf("*");
-			printf("*");
+			printf("%c",219);
+			printf("%c",219);
 			for(int o=0;o<(17)-2;o=o+1)
 			{
 				 printf(" ");
 			}
-			printf("*");
-			printf("*");
+			printf("%c",219);
+			printf("%c",219);
 			for(int p=0;p<(17)-2;p=p+1)
 			{
 				 printf(" ");
 			}
-			printf("*");
+			printf("%c",219);
 			printf("\n");
 		}
 		for(int m=0;m<17*3;m=m+1)
 		{
-			 printf("*");
+			 printf("%c",219);
 		}
 		printf("\n");
 
 	}
-	printf("*");
+	printf("%c",219);
 	for(int q=0;q<(17*3)-2;q=q+1)
 	{
 		 printf(" ");
 	}
-	printf("*");
+	printf("%c",219);
 	printf("\n");
 	for(int r=0;r<17*3;r=r+1)
 	{
-		 printf("*");
+		 printf("%c",219);
 	}
 	printf("\n");
 
@@ -394,6 +394,11 @@ int main(void)
 		ClicRaton();
 		Teclado();
 		imprimir_pantalla(contexto);
+		//contexto++;
+		//if(contexto == 6)
+		//{
+		//	contexto = 0;
+		//}
 	}
 	setvect(INTR, oldhandler);
 	limpiar_texto();
