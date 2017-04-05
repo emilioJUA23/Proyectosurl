@@ -54,49 +54,49 @@ void  pantalla_inicial()
 
 		for(int k=0;k<17*3;k=k+1)
 		{
-			 printf("%c",219);
+			 printf("*");
 		}
 		printf("\n");
 		for(int l=0;l<9;l=l+1)
 		{
 
-			printf("%c",219);
+			printf("*");
 			for(int n=0;n<(17)-2;n=n+1)
 			{
 				 printf(" ");
 			}
-			printf("%c",219);
-			printf("%c",219);
+			printf("*");
+			printf("*");
 			for(int o=0;o<(17)-2;o=o+1)
 			{
 				 printf(" ");
 			}
-			printf("%c",219);
-			printf("%c",219);
+			printf("*");
+			printf("*");
 			for(int p=0;p<(17)-2;p=p+1)
 			{
 				 printf(" ");
 			}
-			printf("%c",219);
+			printf("*");
 			printf("\n");
 		}
 		for(int m=0;m<17*3;m=m+1)
 		{
-			 printf("%c",219);
+			 printf("*");
 		}
 		printf("\n");
 
 	}
-	printf("%c",219);
+	printf("*");
 	for(int q=0;q<(17*3)-2;q=q+1)
 	{
 		 printf(" ");
 	}
-	printf("%c",219);
+	printf("*");
 	printf("\n");
 	for(int r=0;r<17*3;r=r+1)
 	{
-		 printf("%c",219);
+		 printf("*");
 	}
 	printf("\n");
 
@@ -120,6 +120,12 @@ int posy(int pantallay)
 
 void imprimir_pantalla(int pa)
 {
+   if (squares[pa].estado!=1)
+   {
+   	
+   }
+   else
+   {
    for (int i = 0; i < 9; ++i)
    {
 		for (int j = 0; j < 15; ++j)
@@ -136,6 +142,19 @@ void imprimir_pantalla(int pa)
 		}
    }
    squares[pa].color = (squares[pa].color+1)%2;
+   }
+}
+
+void clean_a_screen(int pantalla)
+{
+	for (int i = 0; i < 9; ++i)
+	{
+		for (int j = 0; j < 15; ++j)
+		{
+			squares[pantalla].square[i][j]=' ';
+		}
+	}
+
 }
 
 int tell_me_a_screen(int x,int y)
@@ -220,6 +239,7 @@ void comando()
 	int cmp;
 	char *ptr, *tmp;
 	char space = ' ';
+	int npcb;
 
 	ptr = strchr(cadena,space);
 	ptr++;
@@ -228,23 +248,61 @@ void comando()
 	cmp = strncmp(cadena,add,3);
 	if (cmp == 0)
 	{
-		/* codigo add */
 		limpiar_respuesta();
+		npcb = (int)cadena[4]-'0';
+		if (squares[npcb-1].estado!=0||npcb>6||npcb<1)
+		{
+			gotoxy(2,25);
+			printf("pantalla ya activa o no existe" );
+		}
+		else
+		{
+		  squares[npcb-1].estado=1;	
+		}
+		
 	}
 	else
 	{
 		cmp = strncmp(cadena,pause,5);
 		if (cmp == 0)
 		{
-			/* codigo pause */
 			limpiar_respuesta();
+			npcb = (int)cadena[6]-'0';
+			if (squares[npcb-1].estado==2||npcb>6||npcb<1)
+			{
+				gotoxy(2,25);
+				printf("pantalla ya en pausa o no existe" );
+			}
+			else if (squares[npcb-1].estado==0)
+			{
+				gotoxy(2,25);
+				printf("la pantalla no se encuentra en ejecucion" );
+			}
+			else
+			{
+			  squares[npcb-1].estado=2;	
+			}
 		}
 		else
 		{
 			cmp = strncmp(cadena,play,4);
 			if (cmp == 0)
 			{
-				 /* codigo play */
+				 npcb = (int)cadena[5]-'0';
+				if (squares[npcb-1].estado==1||npcb>6||npcb<1)
+				{
+					gotoxy(2,25);
+					printf("pantalla ya en ejecucion o no existe" );
+				}
+				else if (squares[npcb-1].estado==0)
+				{
+					gotoxy(2,25);
+					printf("la pantalla no se encuentra en ejecucion" );
+				}
+				else
+				{
+				  squares[npcb-1].estado=1;	
+				}
 				 limpiar_respuesta();
 			}
 			else
@@ -252,8 +310,18 @@ void comando()
 				cmp = strncmp(cadena,clear,5);
 				if (cmp == 0)
 				{
-					/* codigo clear */
+				
 					limpiar_respuesta();
+					npcb = (int)cadena[6]-'0';
+					if (squares[npcb-1].estado!=1)
+					{
+						gotoxy(2,25);
+			     		printf("la pantalla no se encuentra en ejecucion" );
+					}
+					else
+					{
+					 	clean_a_screen(npcb-1);
+				    }
 				}
 				else
 				{
@@ -377,7 +445,7 @@ int main(void)
 	_setcursortype(_NOCURSOR);
 	for (int j = 0; j < 6; ++j)
 	{
-		squares[j].estado=1;
+		squares[j].estado=0;
 		squares[j].color=0;
 		squares[j].quantum=0;
 	}
@@ -394,11 +462,6 @@ int main(void)
 		ClicRaton();
 		Teclado();
 		imprimir_pantalla(contexto);
-		//contexto++;
-		//if(contexto == 6)
-		//{
-		//	contexto = 0;
-		//}
 	}
 	setvect(INTR, oldhandler);
 	limpiar_texto();
