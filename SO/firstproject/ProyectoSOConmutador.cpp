@@ -332,6 +332,18 @@ void comando()
 						tmp++;
 						/* codigo quantum */
 						limpiar_respuesta();
+						npcb = (int)cadena[8]-'0';
+						if (npcb >0&&npcb <7)
+						{
+						   int time_is_money = (((int) cadena[10]-'0')*10)+((int) cadena[11]-'0');
+						   squares[npcb-1].quantum=time_is_money;
+						}
+						else
+						{
+							gotoxy(2,25);
+						    printf("quatum no bine declarado pantalla no existente" );
+
+						}
 					}
 					else
 					{
