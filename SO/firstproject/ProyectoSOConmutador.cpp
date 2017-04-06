@@ -450,7 +450,7 @@ int Teclado(void)
 void interrupt temporizador(__CPPARGS)
 {
 	disable();
-	if(tempo == squares[contexto].quantum)
+	if(tempo >= squares[contexto].quantum)
 	{
 		contexto++;
 		if(contexto > 5)
