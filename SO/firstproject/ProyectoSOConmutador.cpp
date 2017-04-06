@@ -348,6 +348,23 @@ void comando()
 							{
 								/* codigo erase */
 								limpiar_respuesta();
+								npcb = (int)cadena[6]-'0';
+								if (squares[npcb-1].estado==0)
+								{
+									gotoxy(2,25);
+						     		printf("la pantalla no se encuentra en ejecucion o pausa" );
+								}
+								else if (npcb>6||npcb<1)
+								{
+									gotoxy(2,25);
+						     		printf("la pantalla no existe" );	
+								}
+								else
+								{
+								 	clean_a_screen(npcb-1);
+								 	imprimir_pantalla(npcb-1);
+								 	squares[npcb-1].estado=0;
+							    }
 							}
 							else
 							{
