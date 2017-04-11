@@ -1,0 +1,18 @@
+c:\users\luis emilio\documents\visual studio 2013\Projects\PruebaAutomatas\PruebaAutomatas\bin\Debug\PruebaAutomatas.exe.config
+c:\users\luis emilio\documents\visual studio 2013\Projects\PruebaAutomatas\PruebaAutomatas\obj\Debug\PruebaAutomatas.csprojResolveAssemblyReference.cache
+c:\users\luis emilio\documents\visual studio 2013\Projects\PruebaAutomatas\PruebaAutomatas\obj\Debug\PruebaAutomatas.Form1.resources
+c:\users\luis emilio\documents\visual studio 2013\Projects\PruebaAutomatas\PruebaAutomatas\obj\Debug\PruebaAutomatas.Properties.Resources.resources
+c:\users\luis emilio\documents\visual studio 2013\Projects\PruebaAutomatas\PruebaAutomatas\obj\Debug\PruebaAutomatas.csproj.GenerateResource.Cache
+c:\users\luis emilio\documents\visual studio 2013\Projects\PruebaAutomatas\PruebaAutomatas\bin\Debug\PruebaAutomatas.exe
+c:\users\luis emilio\documents\visual studio 2013\Projects\PruebaAutomatas\PruebaAutomatas\bin\Debug\PruebaAutomatas.pdb
+c:\users\luis emilio\documents\visual studio 2013\Projects\PruebaAutomatas\PruebaAutomatas\obj\Debug\PruebaAutomatas.exe
+c:\users\luis emilio\documents\visual studio 2013\Projects\PruebaAutomatas\PruebaAutomatas\obj\Debug\PruebaAutomatas.pdb
+C:\Users\LuisEmilio\Documents\Visual Studio 2013\Projects\PruebaAutomatas\PruebaAutomatas\bin\Debug\PruebaAutomatas.exe.config
+C:\Users\LuisEmilio\Documents\Visual Studio 2013\Projects\PruebaAutomatas\PruebaAutomatas\obj\Debug\PruebaAutomatas.exe
+C:\Users\LuisEmilio\Documents\Visual Studio 2013\Projects\PruebaAutomatas\PruebaAutomatas\obj\Debug\PruebaAutomatas.pdb
+C:\Users\LuisEmilio\Documents\Visual Studio 2013\Projects\PruebaAutomatas\PruebaAutomatas\bin\Debug\PruebaAutomatas.exe
+C:\Users\LuisEmilio\Documents\Visual Studio 2013\Projects\PruebaAutomatas\PruebaAutomatas\bin\Debug\PruebaAutomatas.pdb
+C:\Users\LuisEmilio\Documents\Visual Studio 2013\Projects\PruebaAutomatas\PruebaAutomatas\obj\Debug\PruebaAutomatas.csprojResolveAssemblyReference.cache
+C:\Users\LuisEmilio\Documents\Visual Studio 2013\Projects\PruebaAutomatas\PruebaAutomatas\obj\Debug\PruebaAutomatas.Form1.resources
+C:\Users\LuisEmilio\Documents\Visual Studio 2013\Projects\PruebaAutomatas\PruebaAutomatas\obj\Debug\PruebaAutomatas.Properties.Resources.resources
+C:\Users\LuisEmilio\Documents\Visual Studio 2013\Projects\PruebaAutomatas\PruebaAutomatas\obj\Debug\PruebaAutomatas.csproj.GenerateResource.Cache

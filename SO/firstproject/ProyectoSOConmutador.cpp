@@ -17,6 +17,7 @@ struct PCB
 	int quantum;
 	int color;
 	char square[9][15];
+	long stat;
 };
 
 void interrupt (*oldhandler)(__CPPARGS);
@@ -28,6 +29,8 @@ int contexto = 0;
 int pt_cadena = 0; //Size de cadena
 char cadena[80]; //Comandos
 int salir = 0;
+long idle;
+long totalstats;
 PCB squares[6];//squares[pantalla][posicion y][posicion x]
 
 
@@ -122,7 +125,7 @@ void imprimir_pantalla(int pa)
 {
    if (squares[pa].estado!=1)
    {
-   	
+
    }
    else
    {
@@ -248,6 +251,7 @@ void comando()
 	cmp = strncmp(cadena,add,3);
 	if (cmp == 0)
 	{
+		//codigo add
 		limpiar_respuesta();
 		npcb = (int)cadena[4]-'0';
 		if (squares[npcb-1].estado!=0||npcb>6||npcb<1)
@@ -257,9 +261,12 @@ void comando()
 		}
 		else
 		{
-		  squares[npcb-1].estado=1;	
+			squares[npcb-1].estado=1;
+			gotoxy(2,25);
+			printf("proceso pantalla %d", npcb);
+			printf(" creado");
 		}
-		
+
 	}
 	else
 	{
@@ -280,7 +287,10 @@ void comando()
 			}
 			else
 			{
-			  squares[npcb-1].estado=2;	
+				squares[npcb-1].estado=2;
+				gotoxy(2,25);
+				printf("proceso pantalla %d", npcb);
+				printf(" pausado");
 			}
 		}
 		else
@@ -288,6 +298,7 @@ void comando()
 			cmp = strncmp(cadena,play,4);
 			if (cmp == 0)
 			{
+				//codigo play
 				 npcb = (int)cadena[5]-'0';
 				if (squares[npcb-1].estado==1||npcb>6||npcb<1)
 				{
@@ -301,7 +312,10 @@ void comando()
 				}
 				else
 				{
-				  squares[npcb-1].estado=1;	
+					squares[npcb-1].estado=1;
+					gotoxy(2,25);
+					printf("proceso pantalla %d", npcb);
+					printf(" corriendo");
 				}
 				 limpiar_respuesta();
 			}
@@ -310,18 +324,21 @@ void comando()
 				cmp = strncmp(cadena,clear,5);
 				if (cmp == 0)
 				{
-				
+
 					limpiar_respuesta();
 					npcb = (int)cadena[6]-'0';
 					if (squares[npcb-1].estado!=1)
 					{
 						gotoxy(2,25);
-			     		printf("la pantalla no se encuentra en ejecucion" );
+						printf("la pantalla no se encuentra en ejecucion" );
 					}
 					else
 					{
-					 	clean_a_screen(npcb-1);
-				    }
+						clean_a_screen(npcb-1);
+						gotoxy(2,25);
+						printf("proceso pantalla %d", npcb);
+						printf(" limpio su pantalla");
+					}
 				}
 				else
 				{
@@ -337,11 +354,14 @@ void comando()
 						{
 						   int time_is_money = (((int) cadena[10]-'0')*10)+((int) cadena[11]-'0');
 						   squares[npcb-1].quantum=time_is_money;
+						   gotoxy(2,25);
+							printf("proceso pantalla %d", npcb);
+						   printf(" cambio su quantum");
 						}
 						else
 						{
 							gotoxy(2,25);
-						    printf("quatum no bine declarado pantalla no existente" );
+							printf("quatum mal declarado o pantalla no existente" );
 
 						}
 					}
@@ -352,6 +372,63 @@ void comando()
 						{
 							/* codigo stats */
 							limpiar_respuesta();
+							npcb = (int)cadena[6]-'0';
+							if (npcb==-3)
+							{
+								npcb = (int)cadena[7]-'0';
+								if(npcb == 1)
+								{
+									gotoxy(2,25);
+									long resultado = idle * 100;
+									resultado = resultado / totalstats;
+									printf("Idle %d", resultado);
+									printf("%, ");
+								}
+								else
+								{
+									 gotoxy(2,25);
+									 printf("el proceso no existe" );
+								}
+							}
+							else if (squares[npcb-1].estado==0)
+							{
+								gotoxy(2,25);
+								printf("la pantalla no se encuentra en ejecucion o pausa" );
+							}
+							else if (npcb>6||npcb<0)
+							{
+								gotoxy(2,25);
+								printf("la pantalla no existe" );
+							}
+							else if (npcb == 0)
+							{
+								long resultado = 0;
+								gotoxy(2,25);
+								for(int k = 0; k < 6; k++)
+								{
+								   if(squares[k].estado != 0)
+								   {
+										resultado = squares[k].stat * 100;
+										resultado = resultado / totalstats;
+										printf("V#%d", k+1);
+										printf(" %d", resultado);
+										printf("%, ");
+								   }
+								}
+								resultado = idle * 100;
+								resultado = resultado / totalstats;
+								printf("Idle %d", resultado);
+								printf("%, ");
+							}
+							else
+							{
+								long resultado = squares[npcb-1].stat * 100;
+								resultado = resultado / totalstats;
+								gotoxy(2,25);
+								printf("Ventana #%d", npcb);
+								printf(" %d", resultado);
+								printf("%");
+							}
 						}
 						else
 						{
@@ -364,19 +441,24 @@ void comando()
 								if (squares[npcb-1].estado==0)
 								{
 									gotoxy(2,25);
-						     		printf("la pantalla no se encuentra en ejecucion o pausa" );
+									printf("la pantalla no se encuentra en ejecucion o pausa" );
 								}
 								else if (npcb>6||npcb<1)
 								{
 									gotoxy(2,25);
-						     		printf("la pantalla no existe" );	
+									printf("la pantalla no existe" );
 								}
 								else
 								{
-								 	clean_a_screen(npcb-1);
-								 	imprimir_pantalla(npcb-1);
-								 	squares[npcb-1].estado=0;
-							    }
+									clean_a_screen(npcb-1);
+									imprimir_pantalla(npcb-1);
+									squares[npcb-1].estado=0;
+									totalstats -= squares[npcb-1].stat;
+									squares[npcb-1].stat = 0;
+									gotoxy(2,25);
+									printf("proceso pantalla %d", npcb);
+									printf(" fue eliminado");
+								}
 							}
 							else
 							{
@@ -389,7 +471,9 @@ void comando()
 								}
 								else
 								{
-									printf("Comando invalido\n");
+									limpiar_respuesta();
+									gotoxy(2,25);
+									printf("Comando invalido");
 								}
 							}
 						}
@@ -432,6 +516,10 @@ int Teclado(void)
 		   pt_cadena = 0;
 		   //Metodo de Leslie
 		   comando();
+		   for(int l=0;l<80;l++)
+		   {
+				cadena[l] = ' ';
+		   }
 		}
 		else if (pt_cadena >= 79)
 		{
@@ -450,12 +538,18 @@ int Teclado(void)
 void interrupt temporizador(__CPPARGS)
 {
 	disable();
-	if(tempo >= squares[contexto].quantum)
+	if((tempo >= squares[contexto].quantum)||(squares[contexto].estado != 1))
 	{
+		int prueba = 0;
 		contexto++;
-		if(contexto > 5)
+		while((squares[contexto].estado!=1) && (prueba <=5))
 		{
-			contexto = 0;
+			contexto++;
+			if(contexto > 5)
+			{
+				contexto = 0;
+			}
+			prueba++;
 		}
 		tempo =0;
 	}
@@ -463,6 +557,15 @@ void interrupt temporizador(__CPPARGS)
 	{
 		tempo++;
 	}
+	if(squares[contexto].estado != 1)
+	{
+		idle++;
+	}
+	else
+	{
+		squares[contexto].stat++;
+	}
+	totalstats++;
 	enable();
 	oldhandler();
 }
